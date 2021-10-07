@@ -18,15 +18,17 @@ public:
     bool isFinished = false;
 
     crossCircleGame(std::string first, std::string second) {
-        numGames++;
         firstPlayer = std::move(first);
         secondPlayer = std::move(second);
-        std::cout << "This is " << numGames << " cross and circle game" << std::endl;
+        std::cout << "New game started!" << std::endl;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 grid[i][j] = ' ';
             } // initialize grid with empty fields
         }
+    }
+
+    void startGame() {
         do {
             playerTurn();
             printGrid();
@@ -85,6 +87,19 @@ public:
         if (grid[2][0] == winnerChar && grid[1][1] == winnerChar && grid[0][2] == winnerChar) {
             isFinished = true;
         }
+        int countFields = 0;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (grid[i][j] != ' ') {
+                    countFields++;
+                }
+            }
+        }
+        if (countFields >= 9) {
+            std::cout << "Draw" << std::endl;
+            isFinished = true;
+            return;
+        }
         if (isFinished) {
             winnerPlayer = (currentPlayer != 1) ? firstPlayer : secondPlayer;
             std::cout << winnerPlayer << " wins the game as " << winnerChar << std::endl;
@@ -92,13 +107,22 @@ public:
     };
 
     void printGrid() { //prints state of grid
+        std::cout << "##0 1 2" << std::endl;
+        std::cout << "#######" << std::endl;
         for (int i = 0; i < 3; i++) {
+            std::cout << i << "#";
             for (int j = 0; j < 3; j++) {
                 std::cout << grid[i][j] << " ";
             }
             std::cout << std::endl;
         }
     };
+
+    void restartGame() {
+        isFinished = false;
+        winnerPlayer = "";
+        startGame();
+    }
 
     std::string getWinner() {
         return winnerPlayer;
