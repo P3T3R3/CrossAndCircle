@@ -49,8 +49,9 @@ public:
     };
 
     void checkGrid() {
+        cout << "Checking grid..." << endl;
         char winnerChar;
-        if (player) {
+        if (!player) {
             winnerChar = 'X';
         } else {
             winnerChar = 'O';
