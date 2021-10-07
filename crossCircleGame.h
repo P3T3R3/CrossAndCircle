@@ -6,35 +6,38 @@
 #ifndef CROSSCIRCLEGAME_H
 #define CROSSCIRCLEGAME_H
 
-
 class crossCircleGame {
 private:
 
     char grid[3][3]{};
-    bool currentPlayer = 1;
+    bool currentPlayer = 1; //because is only 2 players, I use bool
     std::string winnerPlayer{};
     std::string firstPlayer{}, secondPlayer{};
-    bool isFinished = false;
 public:
+    static int numGames;
+    bool isFinished = false;
+
     crossCircleGame(std::string first, std::string second) {
+        numGames++;
         firstPlayer = std::move(first);
         secondPlayer = std::move(second);
-        std::cout << "This is a new cross and circle game" << std::endl;
+        std::cout << "This is " << numGames << " cross and circle game" << std::endl;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 grid[i][j] = ' ';
-            }
+            } // initialize grid with empty fields
         }
         do {
             playerTurn();
             printGrid();
-            checkGrid();
+            checkGameState();
         } while (!isFinished);
     }
 
     void playerTurn() {
         int column{}, row{};
-        std::cout << "Player " << ((currentPlayer == 1) ? firstPlayer : secondPlayer) << " turn" << std::endl;
+        std::cout << "Player " << ((currentPlayer == 1) ? firstPlayer : secondPlayer)//display adequate player name
+                  << " turn" << std::endl;
         do {
             std::cout << "Enter row:";
             std::cin >> row;
@@ -61,7 +64,7 @@ public:
         }
     };
 
-    void checkGrid() {
+    void checkGameState() {
         char winnerChar;
         if (currentPlayer) {
             winnerChar = 'O';
@@ -88,7 +91,7 @@ public:
         }
     };
 
-    void printGrid() {
+    void printGrid() { //prints state of grid
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 std::cout << grid[i][j] << " ";
