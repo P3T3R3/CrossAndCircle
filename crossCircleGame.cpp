@@ -13,6 +13,7 @@ crossCircleGame::crossCircleGame(std::string first, std::string second) {
             grid[i][j] = ' ';
         } // initialize grid with empty fields
     }
+    printGrid();
 }
 
 void crossCircleGame::startGame() {

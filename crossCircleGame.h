@@ -10,7 +10,7 @@ class crossCircleGame {
 private:
 
     char grid[3][3]{};
-    bool currentPlayer = 1; //because is only 2 players, I use bool
+    bool currentPlayer = 1; //because is only 2 players, we use bool
     std::string winnerPlayer{};
     std::string firstPlayer{}, secondPlayer{};
 public:
