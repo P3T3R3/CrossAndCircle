@@ -3,4 +3,4 @@ project(Cross_Circle)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(Cross_Circle main.cpp crossCircleGame.h)
+add_executable(Cross_Circle main.cpp crossCircleGame.h crossCircleGame.cpp)
